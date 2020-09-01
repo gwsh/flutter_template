@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_template/utils/radii.dart';
-import 'package:flutter_template/utils/utils.dart';
-import 'package:flutter_template/values/values.dart';
+import 'package:flutter_template/common/values/radii.dart';
+import 'package:flutter_template/common/utils/utils.dart';
+import 'package:flutter_template/common/values/values.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -102,7 +102,12 @@ class _WelcomePageState extends State<WelcomePage> {
         shape: RoundedRectangleBorder(
           borderRadius: Radii.k6pxRadius,
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(
+            context,
+            "/sign-in",
+          );
+        },
       ),
     );
   }

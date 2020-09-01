@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/common/values/radii.dart';
 import 'package:flutter_template/common/utils/utils.dart';
 import 'package:flutter_template/common/values/values.dart';
+import 'package:flutter_template/global.dart';
 
 class WelcomePage extends StatefulWidget {
   @override

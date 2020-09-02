@@ -115,8 +115,8 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context,
-        width: 375, height: 812 - 44 - 34, allowFontScaling: true);
+    // ScreenUtil.init(context,
+    //     width: 375, height: 812 - 44 - 34, allowFontScaling: true);
     return Scaffold(
       body: Center(
         child: Column(

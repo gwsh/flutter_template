@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/pages/welcome/welcome_page.dart';
-
+import 'package:flutter_template/pages/index/index.dart';
 import 'global.dart';
 import 'routes.dart';
 
@@ -12,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ducafecat.tech',
-      home: WelcomePage(),
+      home: IndexPage(),
       routes: staticRoutes,
       debugShowCheckedModeBanner: false,
     );

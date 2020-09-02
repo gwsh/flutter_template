@@ -42,19 +42,14 @@ class _SignInPageState extends State<SignInPage> {
       email: _emailController.value.text,
       password: appSHA256(_passController.value.text),
     );
-    //
     UserLoginResponseEntity userProfile = await UserAPI.login(params: params);
     assert(userProfile != null);
     // 持久化数据
-    Global.saveProfile(userProfile);
+    await Global.saveProfile(userProfile);
     Navigator.pushReplacementNamed(
       context,
       "/app",
     );
-    // 缓存测试
-    // List<ChannelResponseEntity> d = await NewsAPI.channels();
-    // assert(d != null);
-
   }
 
   // logo

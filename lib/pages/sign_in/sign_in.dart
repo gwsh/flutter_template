@@ -30,26 +30,31 @@ class _SignInPageState extends State<SignInPage> {
 
   // 登录操作
   _handleLogin() async {
-    // if (!appIsEmail(_emailController.value.text)) {
-    //   toastInfo(msg: '请正确输入邮件');
-    //   return;
-    // }
-    // if (!appCheckStringLength(_passController.value.text, 6)) {
-    //   toastInfo(msg: '密码不能小于6位');
-    //   return;
-    // }
-    // UserLoginRequestEntity params = UserLoginRequestEntity(
-    //   email: _emailController.value.text,
-    //   password: appSHA256(_passController.value.text),
-    // );
+    if (!appIsEmail(_emailController.value.text)) {
+      toastInfo(msg: '请正确输入邮件');
+      return;
+    }
+    if (!appCheckStringLength(_passController.value.text, 6)) {
+      toastInfo(msg: '密码不能小于6位');
+      return;
+    }
+    UserLoginRequestEntity params = UserLoginRequestEntity(
+      email: _emailController.value.text,
+      password: appSHA256(_passController.value.text),
+    );
     //
-    // UserLoginResponseEntity userProfile = await UserAPI.login(params: params);
-    // assert(userProfile != null);
-    // // 持久化数据
-    // Global.saveProfile(userProfile);
+    UserLoginResponseEntity userProfile = await UserAPI.login(params: params);
+    assert(userProfile != null);
+    // 持久化数据
+    Global.saveProfile(userProfile);
+    Navigator.pushReplacementNamed(
+      context,
+      "/app",
+    );
     // 缓存测试
-    // List<CategoryResponseEntity> d = await NewsAPI.categories();
+    // List<ChannelResponseEntity> d = await NewsAPI.channels();
     // assert(d != null);
+
   }
 
   // logo

@@ -104,7 +104,7 @@ class _WelcomePageState extends State<WelcomePage> {
           borderRadius: Radii.k6pxRadius,
         ),
         onPressed: () {
-          Navigator.pushNamed(
+          Navigator.pushReplacementNamed(
             context,
             "/sign-in",
           );

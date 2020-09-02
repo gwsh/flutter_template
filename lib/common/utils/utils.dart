@@ -4,3 +4,5 @@ export 'validator.dart';
 export 'http.dart';
 export 'storage_util.dart';
 export 'net_cache.dart';
+export 'iconfont.dart';
+export 'date.dart';

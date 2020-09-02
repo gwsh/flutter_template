@@ -18,7 +18,7 @@ class NewsAPI {
     return NewsRecommendResponseEntity.fromJson(response);
   }
 
-  /// 分类
+  /// 分类_
   static Future<List<CategoryResponseEntity>> categories() async {
     var response = await HttpUtil().get('/categories');
     return response

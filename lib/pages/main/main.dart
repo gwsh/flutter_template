@@ -36,13 +36,19 @@ class _MainPageState extends State<MainPage> {
     _loadLatestWithDiskCache();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    _controller?.dispose();
+  }
+
   // 如果有磁盘缓存，延迟3秒拉取更新档案
   _loadLatestWithDiskCache() {
     if (CACHE_ENABLE == true) {
       var cacheData = StorageUtil().getJSON(STORAGE_INDEX_NEWS_CACHE_KEY);
       if (cacheData != null) {
         Timer(Duration(seconds: 3), () {
-          _controller.callRefresh();
+          _controller?.callRefresh();
         });
       }
     }
@@ -150,7 +156,6 @@ class _MainPageState extends State<MainPage> {
                   Divider(height: 1),
                 ]);
               }
-
               // 返回
               return Column(
                 children: widgets,

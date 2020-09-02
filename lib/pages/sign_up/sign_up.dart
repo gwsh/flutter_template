@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/common/utils/utils.dart';
 import 'package:flutter_template/common/values/values.dart';
@@ -184,6 +185,17 @@ class _SignUpPageState extends State<SignUpPage> {
       resizeToAvoidBottomInset: false,
       appBar: transparentAppBar(
         context: context,
+        leading: InkWell(
+          onTap: () {
+            ExtendedNavigator.rootNavigator.pop();
+          },
+          child: Container(
+            child: Icon(
+              Icons.arrow_back,
+              color: AppColors.primaryText,
+            ),
+          ),
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(

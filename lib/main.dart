@@ -1,9 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/pages/index/index.dart';
+import 'package:flutter_template/common/router/auth_grard.dart';
+import 'package:flutter_template/common/router/router.gr.dart';
 import 'package:provider/provider.dart';
 import 'common/provider/provider.dart';
 import 'global.dart';
-import 'routes.dart';
 
 void main() => Global.init().then(
       (e) => runApp(
@@ -33,9 +34,25 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '927cai.cn',
-      home: IndexPage(),
-      routes: staticRoutes,
       debugShowCheckedModeBanner: false,
+      builder: ExtendedNavigator<AppRouter>(
+        initialRoute: Routes.indexPageRoute,
+        router: AppRouter(),
+        // 权限守卫
+        guards: [AuthGuard()],
+      ),
     );
   }
 }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: '927cai.cn',
+//       home: IndexPage(),
+//       routes: staticRoutes,
+//       debugShowCheckedModeBanner: false,
+//     );
+//   }
+// }

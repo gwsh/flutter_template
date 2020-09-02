@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/common/apis/apis.dart';
 import 'package:flutter_template/common/entites/entitys.dart';
+import 'package:flutter_template/common/router/router.gr.dart';
 import 'package:flutter_template/common/utils/security.dart';
 import 'package:flutter_template/common/utils/utils.dart';
 import 'package:flutter_template/common/values/values.dart';
@@ -22,10 +24,11 @@ class _SignInPageState extends State<SignInPage> {
 
   // 跳转 注册界面
   _handleNavSignUp() {
-    Navigator.pushNamed(
-      context,
-      "/sign-up",
-    );
+    // Navigator.pushNamed(
+    //   context,
+    //   "/sign-up",
+    // );
+    ExtendedNavigator.rootNavigator.pushNamed(Routes.signUpPageRoute);
   }
 
   // 登录操作
@@ -47,10 +50,8 @@ class _SignInPageState extends State<SignInPage> {
     assert(userProfile != null);
     // 持久化数据
     await Global.saveProfile(userProfile);
-    Navigator.pushReplacementNamed(
-      context,
-      "/app",
-    );
+    ExtendedNavigator.rootNavigator
+        .pushReplacementNamed(Routes.applicationPageRoute);
   }
 
   // logo

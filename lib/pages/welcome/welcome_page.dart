@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/common/router/router.gr.dart';
 import 'package:flutter_template/common/values/radii.dart';
 import 'package:flutter_template/common/utils/utils.dart';
 import 'package:flutter_template/common/values/values.dart';
@@ -102,9 +104,8 @@ class _WelcomePageState extends State<WelcomePage> {
           borderRadius: Radii.k6pxRadius,
         ),
         onPressed: () {
-          Navigator.pushReplacementNamed(
-            context,
-            "/sign-in",
+          ExtendedNavigator.rootNavigator.pushReplacementNamed(
+            Routes.signInPageRoute,
           );
         },
       ),

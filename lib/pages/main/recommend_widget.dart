@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/common/entites/entitys.dart';
+import 'package:flutter_template/common/router/router.gr.dart';
 import 'package:flutter_template/common/utils/utils.dart';
 import 'package:flutter_template/common/values/values.dart';
 import 'package:flutter_template/common/widgets/widgets.dart';
@@ -12,14 +14,22 @@ Widget recommendWidget(NewsRecommendResponseEntity newsRecommend) {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         // 图
-        imageCached(
-          newsRecommend.thumbnail,
-          width: appSetWidth(335),
-          height: appSetHeight(290),
+        InkWell(
+          onTap: () {
+            ExtendedNavigator.rootNavigator.pushDetailsPageRoute(
+              title: newsRecommend.title,
+              url: newsRecommend.url,
+            );
+          },
+          child: imageCached(
+            newsRecommend.thumbnail,
+            width: appSetWidth(335),
+            height: appSetHeight(290),
+          ),
         ),
         // 作者
         Container(
-          margin: EdgeInsets.only(top:appSetHeight(14)),
+          margin: EdgeInsets.only(top: appSetHeight(14)),
           child: Text(
             newsRecommend.author,
             style: TextStyle(

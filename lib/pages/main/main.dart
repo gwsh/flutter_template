@@ -174,11 +174,15 @@ class _MainPageState extends State<MainPage> {
             controller: _controller,
             header: MaterialHeader(),
             onRefresh: () async {
-              await _loadNewsData(
-                _selCategoryCode,
-                refresh: true,
-              );
-              _controller.finishRefresh();
+              try {
+                await _loadNewsData(
+                  _selCategoryCode,
+                  refresh: true,
+                );
+                _controller?.finishRefresh();
+              } catch (e) {
+                _controller?.finishRefresh();
+              }
             },
             child: SingleChildScrollView(
               child: Column(

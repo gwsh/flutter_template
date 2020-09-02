@@ -172,7 +172,7 @@ class _MainPageState extends State<MainPage> {
         : EasyRefresh(
             enableControlFinishRefresh: true,
             controller: _controller,
-            header: ClassicalHeader(),
+            header: MaterialHeader(),
             onRefresh: () async {
               await _loadNewsData(
                 _selCategoryCode,

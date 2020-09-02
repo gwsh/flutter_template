@@ -1,26 +1,58 @@
 
+import 'package:flutter/material.dart';
 import 'package:flutter_template/common/entites/entitys.dart';
 import 'package:flutter_template/common/utils/utils.dart';
+import 'package:flutter_template/common/values/values.dart';
+
 
 /// 新闻
 class NewsAPI {
   /// 翻页
-  static Future<NewsPageListResponseEntity> newsPageList(
-      {NewsPageListRequestEntity params}) async {
-    var response = await HttpUtil().get('/news', params: params);
+  /// refresh 是否刷新
+  static Future<NewsPageListResponseEntity> newsPageList({
+    @required BuildContext context,
+    NewsPageListRequestEntity params,
+    bool refresh = false,
+    bool cacheDisk = false,
+  }) async {
+    var response = await HttpUtil().get(
+      '/news',
+      context: context,
+      params: params?.toJson(),
+      refresh: refresh,
+      cacheDisk: cacheDisk,
+      cacheKey: STORAGE_INDEX_NEWS_CACHE_KEY,
+    );
     return NewsPageListResponseEntity.fromJson(response);
   }
 
   /// 推荐
-  static Future<NewsRecommendResponseEntity> newsRecommend(
-      {NewsRecommendRequestEntity params}) async {
-    var response = await HttpUtil().get('/news/recommend', params: params);
+  static Future<NewsRecommendResponseEntity> newsRecommend({
+    @required BuildContext context,
+    NewsRecommendRequestEntity params,
+    bool refresh = false,
+    bool cacheDisk = false,
+  }) async {
+    var response = await HttpUtil().get(
+      '/news/recommend',
+      context: context,
+      params: params?.toJson(),
+      refresh: refresh,
+      cacheDisk: cacheDisk,
+    );
     return NewsRecommendResponseEntity.fromJson(response);
   }
 
-  /// 分类_
-  static Future<List<CategoryResponseEntity>> categories() async {
-    var response = await HttpUtil().get('/categories');
+  /// 分类
+  static Future<List<CategoryResponseEntity>> categories({
+    @required BuildContext context,
+    bool cacheDisk = false,
+  }) async {
+    var response = await HttpUtil().get(
+      '/categories',
+      context: context,
+      cacheDisk: cacheDisk,
+    );
     return response
         .map<CategoryResponseEntity>(
             (item) => CategoryResponseEntity.fromJson(item))
@@ -28,8 +60,15 @@ class NewsAPI {
   }
 
   /// 频道
-  static Future<List<ChannelResponseEntity>> channels() async {
-    var response = await HttpUtil().get('/channels');
+  static Future<List<ChannelResponseEntity>> channels({
+    @required BuildContext context,
+    bool cacheDisk = false,
+  }) async {
+    var response = await HttpUtil().get(
+      '/channels',
+      context: context,
+      cacheDisk: cacheDisk,
+    );
     return response
         .map<ChannelResponseEntity>(
             (item) => ChannelResponseEntity.fromJson(item))
@@ -37,8 +76,17 @@ class NewsAPI {
   }
 
   /// 标签列表
-  static Future<List<TagResponseEntity>> tags({TagRequestEntity params}) async {
-    var response = await HttpUtil().get('/tags', params: params);
+  static Future<List<TagResponseEntity>> tags({
+    @required BuildContext context,
+    TagRequestEntity params,
+    bool cacheDisk = false,
+  }) async {
+    var response = await HttpUtil().get(
+      '/tags',
+      context: context,
+      params: params?.toJson(),
+      cacheDisk: cacheDisk,
+    );
     return response
         .map<TagResponseEntity>((item) => TagResponseEntity.fromJson(item))
         .toList();

@@ -20,12 +20,12 @@ class _AccountPageState extends State<AccountPage> {
       children: <Widget>[
         Text('用户: ${Global.profile.displayName}'),
         Divider(),
-        // MaterialButton(
-        //   onPressed: () {
-        //     goLoginPage(context);
-        //   },
-        //   child: Text('退出'),
-        // ),
+        MaterialButton(
+          onPressed: () {
+            goLoginPage(context);
+          },
+          child: Text('退出'),
+        ),
         // Divider(),
         MaterialButton(
           onPressed: () {

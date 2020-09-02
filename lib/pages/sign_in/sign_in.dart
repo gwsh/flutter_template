@@ -42,7 +42,8 @@ class _SignInPageState extends State<SignInPage> {
       email: _emailController.value.text,
       password: appSHA256(_passController.value.text),
     );
-    UserLoginResponseEntity userProfile = await UserAPI.login(params: params);
+    UserLoginResponseEntity userProfile =
+        await UserAPI.login(params: params, context: context);
     assert(userProfile != null);
     // 持久化数据
     await Global.saveProfile(userProfile);

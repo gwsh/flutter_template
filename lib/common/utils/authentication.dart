@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/common/router/router.gr.dart';
 import 'package:flutter_template/common/utils/utils.dart';
 import 'package:flutter_template/common/values/values.dart';
 import 'package:flutter_template/global.dart';
@@ -20,6 +22,5 @@ Future deleteAuthentication() async {
 /// 重新登录
 Future goLoginPage(BuildContext context) async {
   await deleteAuthentication();
-  Navigator.pushNamedAndRemoveUntil(
-      context, "/sign-in", (Route<dynamic> route) => false);
+  ExtendedNavigator.rootNavigator.pushReplacementNamed(Routes.signInPageRoute);
 }

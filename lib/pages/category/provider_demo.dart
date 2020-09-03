@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_template/common/entites/entitys.dart';
 import 'package:flutter_template/common/provider/provider.dart';
 import 'package:flutter_template/common/stateview/stateview.dart';
@@ -14,41 +15,59 @@ class CategoryPage extends StatefulWidget {
 }
 
 class _CategoryPageState extends State<CategoryPage> {
+  EasyRefreshController _controller; // EasyRefresh控制器
   @override
   void initState() {
     super.initState();
+    _controller = EasyRefreshController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller?.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
-        child: SingleChildScrollView(
-          child: Column(children: <Widget>[
-            Container(
-              height: appSetHeight(280),
-              child: ProviderWidget<ProviderViewDemo>(
-                model: ProviderViewDemo(),
-                onReady: (model) {
-                  model.getProviderEntity(context: context);
-                },
-                builder: (context, model, child) {
-                  return MultiStateWidget(
-                    failOnPressed: () {
-                      /// 这里是请求错误的情况 我们需要的回调函数
-                      /// 一般是写一个刷新按钮的操作
-                      toastInfo(msg: "模拟再次请求-刷新页面啦");
-                    },
-                    builder: (context) => _buildSubjectWidget(model.entity),
-                    state: model.state,
+    return ProviderWidget<ProviderViewDemo>(
+      model: ProviderViewDemo(),
+      onReady: (model) {
+        model.getProviderEntity(context: context);
+      },
+      builder: (context, model, child) {
+        return MultiStateWidget(
+          failOnPressed: () {
+            toastInfo(msg: "模拟刷新");
+          },
+          builder: (context) => Scaffold(
+            backgroundColor: Colors.white,
+            body: Container(
+              child: EasyRefresh(
+                enableControlFinishRefresh: true,
+                controller: _controller,
+                header: MaterialHeader(),
+                onRefresh: () async {
+                  await model.getProviderEntity(
+                    context: context,
+                    refresh: true,
                   );
+                  _controller?.finishRefresh();
                 },
+                child: SingleChildScrollView(
+                  child: Column(children: <Widget>[
+                    Container(
+                      height: appSetHeight(280),
+                      child: _buildSubjectWidget(model.entity),
+                    ),
+                  ]),
+                ),
               ),
             ),
-          ]),
-        ),
-      ),
+          ),
+          state: model.state,
+        );
+      },
     );
   }
 

@@ -5,6 +5,7 @@ import 'package:flutter_template/common/entites/entitys.dart';
 import 'package:flutter_template/common/utils/utils.dart';
 import 'package:flutter_template/common/values/server.dart';
 import 'package:flutter_template/common/viewmodel/viewmodel.dart';
+import 'package:flutter_template/common/widgets/widgets.dart';
 
 /// 这是状态的View
 /// 典型的MVVM
@@ -20,7 +21,10 @@ class ProviderViewDemo extends BaseViewModel {
     bool refresh = false,
     bool cacheDisk = false,
   }) async {
-    state = BaseState.LOADING;
+    /// 下拉刷新不需要骨架卡片
+    if (!refresh) {
+      state = BaseState.LOADING;
+    }
     notifyListeners();
     ProviderDemoAPI.getProviderEntity(
       context: context,
@@ -31,9 +35,13 @@ class ProviderViewDemo extends BaseViewModel {
         compute(decode, json).then((value) {
           if (value == null) {
             state = BaseState.EMPTY;
+            toastInfo(msg: "暂无数据");
           } else {
             entity = value;
             state = BaseState.CONTENT;
+            if (refresh) {
+              toastInfo(msg: "刷新成功");
+            }
           }
           notifyListeners();
         });

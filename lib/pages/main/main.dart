@@ -99,7 +99,6 @@ class _MainPageState extends State<MainPage> {
       cacheDisk: true,
 
     );
-
     if (mounted) {
       setState(() {});
     }

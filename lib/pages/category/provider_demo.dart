@@ -24,7 +24,7 @@ class _CategoryPageState extends State<CategoryPage> {
   void initState() {
     super.initState();
     _controller = EasyRefreshController();
-    _loadLatestWithDiskCache();
+    // _loadLatestWithDiskCache();
   }
 
   // 如果有磁盘缓存，延迟3秒拉取更新档案
@@ -54,8 +54,11 @@ class _CategoryPageState extends State<CategoryPage> {
       },
       builder: (context, model, child) {
         return MultiStateWidget(
-          failOnPressed: () {
-            toastInfo(msg: "模拟刷新");
+          failOnPressed: () async {
+            await model.getProviderEntity(
+              context: context,
+              refresh: true,
+            );
           },
           builder: (context) => Scaffold(
             backgroundColor: Colors.white,

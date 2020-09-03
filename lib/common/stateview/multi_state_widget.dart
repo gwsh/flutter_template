@@ -14,10 +14,12 @@ class MultiStateWidget extends StatefulWidget {
   Widget failWidget;
   Content builder;
   BaseState state;
+  VoidCallback failOnPressed;
 
   MultiStateWidget({
     Key key,
     Content builder,
+    @required this.failOnPressed,
     this.state,
     this.loadingWidget,
     this.emptyWidget,
@@ -32,7 +34,9 @@ class MultiStateWidget extends StatefulWidget {
       emptyWidget = EmptyStateWidget();
     }
     if (failWidget == null) {
-      failWidget = ErrorStateWidget();
+      failWidget = ErrorStateWidget(
+        onPressed: failOnPressed,
+      );
     }
     if (loadingWidget == null) {
       loadingWidget = LoadingStateWidget();

@@ -29,12 +29,14 @@ class ProviderViewDemo extends BaseViewModel {
       success: (json) {
         /// 开辟子线程
         compute(decode, json).then((value) {
-          if (value == null) {
-            state = BaseState.EMPTY;
-          } else {
-            entity = value;
-            state = BaseState.CONTENT;
-          }
+          // if (value == null) {
+          //   state = BaseState.EMPTY;
+          // } else {
+          //   entity = value;
+          //   state = BaseState.CONTENT;
+          // }
+          state = BaseState.EMPTY;
+          // state = BaseState.FAIL;
           notifyListeners();
         });
       },

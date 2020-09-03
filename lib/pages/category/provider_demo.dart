@@ -35,6 +35,11 @@ class _CategoryPageState extends State<CategoryPage> {
                 },
                 builder: (context, model, child) {
                   return MultiStateWidget(
+                    failOnPressed: () {
+                      /// 这里是请求错误的情况 我们需要的回调函数
+                      /// 一般是写一个刷新按钮的操作
+                      toastInfo(msg: "模拟再次请求-刷新页面啦");
+                    },
                     builder: (context) => _buildSubjectWidget(model.entity),
                     state: model.state,
                   );

@@ -149,10 +149,8 @@ class _ApplicationPageState extends State<ApplicationPage>
   // 底部导航
   Widget _buildBottomNavigationBar() {
     return BottomNavigationBar(
-      backgroundColor: Colors.black,
       items: _bottomTabs,
       currentIndex: _page,
-      // fixedColor: AppColors.primaryElement,
       type: BottomNavigationBarType.fixed,
       onTap: _handleNavBarTap,
       showSelectedLabels: false,

@@ -140,9 +140,9 @@ class _CategoryPageState extends State<CategoryPage> {
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
               physics: BouncingScrollPhysics(),
-              itemCount: subjectEntity.item.length,
+              itemCount: subjectEntity?.item?.length,
               itemBuilder: (context, index) {
-                var bean = subjectEntity.item[index];
+                var bean = subjectEntity?.item[index];
                 return Container(
                   child: Column(
                     children: <Widget>[
@@ -165,7 +165,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                 padding: EdgeInsets.symmetric(
                                     vertical: 2, horizontal: 0),
                                 child: Text(
-                                  "${bean.title}",
+                                  "${bean?.title}",
                                   style: TextStyle(
                                       color: Theme.of(context)
                                           .textTheme

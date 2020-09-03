@@ -85,7 +85,7 @@ class _ApplicationPageState extends State<ApplicationPage>
   // tab栏动画
   void _handleNavBarTap(int index) {
     _pageController.animateToPage(index,
-        duration: const Duration(milliseconds: 200), curve: Curves.ease);
+        duration: const Duration(milliseconds: 50), curve: Curves.ease);
   }
 
   // tab栏页码切换
@@ -158,12 +158,25 @@ class _ApplicationPageState extends State<ApplicationPage>
     );
   }
 
+  DateTime _lastPressedAt; //上次点击时间
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(),
-      body: _buildPageView(),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+    return WillPopScope(
+      onWillPop: () async {
+        if (_lastPressedAt == null ||
+            DateTime.now().difference(_lastPressedAt) > Duration(seconds: 1)) {
+          //两次点击间隔超过1秒则重新计时
+          _lastPressedAt = DateTime.now();
+          toastInfo(msg: "连续两次退出哟~");
+          return false;
+        }
+        return true;
+      },
+      child: Scaffold(
+        appBar: _buildAppBar(),
+        body: _buildPageView(),
+        bottomNavigationBar: _buildBottomNavigationBar(),
+      ),
     );
   }
 }

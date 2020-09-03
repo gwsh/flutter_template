@@ -5,11 +5,13 @@ class ProviderDemoEntity {
   ProviderDemoEntity({this.item});
 
   ProviderDemoEntity.fromJson(Map<String, dynamic> json) {
-    if (json['subjects'] != null) {
-      item = new List<Subjects>();
-      json['subjects'].forEach((v) {
-        item.add(new Subjects.fromJson(v));
-      });
+    if (json != null) {
+      if (json['subjects'] != null) {
+        item = new List<Subjects>();
+        json['subjects'].forEach((v) {
+          item.add(new Subjects.fromJson(v));
+        });
+      }
     }
   }
 

@@ -289,26 +289,27 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: _buildAppBar(),
-        body: Stack(
-          children: <Widget>[
-            SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  _buildPageTitle(),
-                  Divider(height: 1),
-                  _buildPageHeader(),
-                  _buildWebView(),
-                ],
-              ),
+      appBar: _buildAppBar(),
+      body: Stack(
+        children: <Widget>[
+          SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                _buildPageTitle(),
+                Divider(height: 1),
+                _buildPageHeader(),
+                _buildWebView(),
+              ],
             ),
-            _isPageFinished == true
-                ? Container()
-                : Align(
-                    alignment: Alignment.center,
-                    child: LoadingBouncingGrid.square(),
-                  ),
-          ],
-        ));
+          ),
+          _isPageFinished == true
+              ? Container()
+              : Align(
+                  alignment: Alignment.center,
+                  child: LoadingBouncingGrid.square(),
+                ),
+        ],
+      ),
+    );
   }
 }

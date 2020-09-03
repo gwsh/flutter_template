@@ -18,7 +18,8 @@ class CategoryPage extends StatefulWidget {
   _CategoryPageState createState() => _CategoryPageState();
 }
 
-class _CategoryPageState extends State<CategoryPage> {
+class _CategoryPageState extends State<CategoryPage>
+    with AutomaticKeepAliveClientMixin {
   EasyRefreshController _controller; // EasyRefresh控制器
   @override
   void initState() {
@@ -47,6 +48,9 @@ class _CategoryPageState extends State<CategoryPage> {
 
   @override
   Widget build(BuildContext context) {
+    // 切记！ 为了不让PageView子页面重绘
+    // 子页面需要 super.build
+    super.build(context);
     return ProviderWidget<ProviderViewDemo>(
       model: ProviderViewDemo(),
       onReady: (model) {
@@ -189,4 +193,7 @@ class _CategoryPageState extends State<CategoryPage> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -1,16 +1,18 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_template/common/apis/apis.dart';
 import 'package:flutter_template/common/entites/entitys.dart';
 import 'package:flutter_template/common/utils/utils.dart';
 import 'package:flutter_template/common/values/values.dart';
+import 'package:flutter_template/common/viewmodel/viewmodel.dart';
 import 'package:flutter_template/common/widgets/widgets.dart';
 import 'package:flutter_template/pages/main/mian_import.dart';
 
 import 'recommend_widget.dart';
 
+/// 这个页面没有采用状态管理
+/// 状态管理的Demo => see [ProviderViewDemo]
 class MainPage extends StatefulWidget {
   MainPage({Key key}) : super(key: key);
 
@@ -18,15 +20,19 @@ class MainPage extends StatefulWidget {
   _MainPageState createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainPageState extends State<MainPage>
+    with AutomaticKeepAliveClientMixin {
   EasyRefreshController _controller; // EasyRefresh控制器
-
   NewsPageListResponseEntity _newsPageList; // 新闻翻页
   NewsItem _newsRecommend; // 新闻推荐
   List<CategoryResponseEntity> _categories; // 分类
   List<ChannelResponseEntity> _channels; // 频道
-
   String _selCategoryCode; // 选中的分类Code
+
+  @override
+  // 切记！ 为了不让PageView子页面重绘
+  // 每一个子页面 都要在class with AutomaticKeepAliveClientMixin
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -97,7 +103,6 @@ class _MainPageState extends State<MainPage> {
       params: NewsPageListRequestEntity(categoryCode: categoryCode),
       refresh: refresh,
       cacheDisk: true,
-
     );
     if (mounted) {
       setState(() {});
@@ -172,6 +177,9 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    // 切记！ 为了不让PageView子页面重绘
+    // 子页面需要 super.build
+    super.build(context);
     return _newsPageList == null
         ? cardListSkeleton()
         : EasyRefresh(

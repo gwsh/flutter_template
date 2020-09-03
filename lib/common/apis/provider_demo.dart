@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/common/utils/utils.dart';
 import 'package:flutter_template/common/values/server.dart';
+import 'package:flutter_template/common/values/values.dart';
 
 typedef Success = void Function(dynamic json);
 
@@ -22,6 +23,7 @@ class ProviderDemoAPI {
       context: context,
       refresh: refresh,
       cacheDisk: cacheDisk,
+      cacheKey: STORAGE_PROVIDER_DEMO_CACHE_KEY,
       success: success,
       fail: fail,
       after: after,

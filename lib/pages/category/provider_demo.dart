@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_template/common/entites/entitys.dart';
 import 'package:flutter_template/common/provider/provider.dart';
 import 'package:flutter_template/common/stateview/stateview.dart';
 import 'package:flutter_template/common/utils/screen.dart';
+import 'package:flutter_template/common/utils/utils.dart';
+import 'package:flutter_template/common/values/values.dart';
 import 'package:flutter_template/common/viewmodel/viewmodel.dart';
 import 'package:flutter_template/common/widgets/widgets.dart';
 
@@ -20,6 +24,19 @@ class _CategoryPageState extends State<CategoryPage> {
   void initState() {
     super.initState();
     _controller = EasyRefreshController();
+    _loadLatestWithDiskCache();
+  }
+
+  // 如果有磁盘缓存，延迟3秒拉取更新档案
+  _loadLatestWithDiskCache() {
+    if (CACHE_ENABLE == true) {
+      var cacheData = StorageUtil().getJSON(STORAGE_PROVIDER_DEMO_CACHE_KEY);
+      if (cacheData != null) {
+        Timer(Duration(seconds: 3), () {
+          _controller?.callRefresh();
+        });
+      }
+    }
   }
 
   @override
@@ -33,7 +50,7 @@ class _CategoryPageState extends State<CategoryPage> {
     return ProviderWidget<ProviderViewDemo>(
       model: ProviderViewDemo(),
       onReady: (model) {
-        model.getProviderEntity(context: context);
+        model.getProviderEntity(context: context, cacheDisk: true);
       },
       builder: (context, model, child) {
         return MultiStateWidget(

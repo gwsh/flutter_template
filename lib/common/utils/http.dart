@@ -20,6 +20,12 @@ import 'utils.dart';
   * 从2.1.x升级到 3.x
   * https://github.com/flutterchina/dio/blob/master/migration_to_3.0.md
 */
+typedef Success = void Function(dynamic json);
+
+typedef Fail = void Function(String reason, int code);
+
+typedef After = void Function();
+
 class HttpUtil {
   static HttpUtil _instance = HttpUtil._internal();
 
@@ -236,17 +242,21 @@ class HttpUtil {
   /// list 是否列表 默认 false
   /// cacheKey 缓存key
   /// cacheDisk 是否磁盘缓存
-  Future get(
-    String path, {
-    @required BuildContext context,
-    dynamic params,
-    Options options,
-    bool refresh = false,
-    bool noCache = !CACHE_ENABLE,
-    bool list = false,
-    String cacheKey,
-    bool cacheDisk = false,
-  }) async {
+  /// success 请求成功的回调
+  /// fail 请求错误的回调
+  /// after 请求之前的操作
+  Future get(String path,
+      {@required BuildContext context,
+      dynamic params,
+      Options options,
+      bool refresh = false,
+      bool noCache = !CACHE_ENABLE,
+      bool list = false,
+      String cacheKey,
+      bool cacheDisk = false,
+      Success success,
+      Fail fail,
+      After after}) async {
     Options requestOptions = options ?? Options();
     requestOptions = requestOptions.merge(extra: {
       "context": context,
@@ -265,6 +275,18 @@ class HttpUtil {
         queryParameters: params,
         options: requestOptions,
         cancelToken: cancelToken);
+    if (response.statusCode == 200) {
+      if (success != null) {
+        success(response.data);
+      }
+    } else {
+      if (fail != null) {
+        fail(response.statusMessage, response.statusCode);
+      }
+    }
+    if (after != null) {
+      after();
+    }
     return response.data;
   }
 

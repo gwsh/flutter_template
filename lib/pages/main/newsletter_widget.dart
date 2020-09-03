@@ -4,6 +4,8 @@ import 'package:flutter_template/common/utils/utils.dart';
 import 'package:flutter_template/common/values/values.dart';
 import 'package:flutter_template/common/widgets/widgets.dart';
 
+/// ad 广告条
+/// 邮件订阅
 Widget newsletterWidget() {
   return Container(
     margin: EdgeInsets.all(appSetWidth(20)),

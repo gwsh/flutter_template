@@ -3,6 +3,8 @@ import 'package:flutter_template/common/entites/entitys.dart';
 import 'package:flutter_template/common/utils/utils.dart';
 import 'package:flutter_template/common/values/values.dart';
 
+/// 分类菜单
+/// author gwsh<shundong106@gmail.com>
 Widget newsCategoriesWidget(
     {List<CategoryResponseEntity> categories,
     String selCategoryCode,

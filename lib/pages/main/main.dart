@@ -22,7 +22,7 @@ class _MainPageState extends State<MainPage> {
   EasyRefreshController _controller; // EasyRefresh控制器
 
   NewsPageListResponseEntity _newsPageList; // 新闻翻页
-  NewsRecommendResponseEntity _newsRecommend; // 新闻推荐
+  NewsItem _newsRecommend; // 新闻推荐
   List<CategoryResponseEntity> _categories; // 分类
   List<ChannelResponseEntity> _channels; // 频道
 
@@ -97,6 +97,7 @@ class _MainPageState extends State<MainPage> {
       params: NewsPageListRequestEntity(categoryCode: categoryCode),
       refresh: refresh,
       cacheDisk: true,
+
     );
 
     if (mounted) {

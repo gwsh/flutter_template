@@ -3,10 +3,20 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_template/common/entites/entitys.dart';
-
 import 'common/provider/provider.dart';
 import 'common/utils/utils.dart';
 import 'common/values/values.dart';
+
+/// pro环境：生产环境，面向外部用户的环境，连接上互联网即可访问的正式环境。
+/// pre环境：灰度环境，外部用户可以访问，但是服务器配置相对低，其它和生产一样。
+/// test环境：测试环境，外部用户无法访问，专门给测试人员使用的，版本相对稳定。
+/// dev环境：开发环境，外部用户无法访问，开发人员使用，版本变动很大。
+enum ModelType {
+  dev,
+  pro,
+  pre,
+  test,
+}
 
 /// 全局配置
 class Global {
@@ -14,6 +24,10 @@ class Global {
   static UserLoginResponseEntity profile = UserLoginResponseEntity(
     accessToken: null,
   );
+
+  /// 开发环境 // TODO 待整合
+  /// 预计整合日志系统(dev环境才会显示日志) 和BASE_URL
+  static ModelType modelType = ModelType.pro;
 
   /// 是否第一次打开
   static bool isFirstOpen = false;
@@ -53,8 +67,13 @@ class Global {
 
     // android 状态栏为透明的沉浸
     if (Platform.isAndroid) {
-      SystemUiOverlayStyle systemUiOverlayStyle =
-          SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+      //设置Android头部的导航栏透明
+      SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent, //全局设置透明
+          statusBarIconBrightness: Brightness.dark
+          //light:黑色图标 dark：白色图标
+          //在此处设置statusBarIconBrightness为全局设置
+          );
       SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
     }
   }

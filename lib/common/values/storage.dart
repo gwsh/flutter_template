@@ -6,3 +6,4 @@ const String STORAGE_DEVICE_ALREADY_OPEN_KEY = 'device_already_open';
 
 /// 首页新闻cacheKey
 const String STORAGE_INDEX_NEWS_CACHE_KEY = 'cache_index_news';
+

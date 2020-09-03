@@ -44,15 +44,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: '927cai.cn',
-//       home: IndexPage(),
-//       routes: staticRoutes,
-//       debugShowCheckedModeBanner: false,
-//     );
-//   }
-// }

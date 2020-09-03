@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_template/common/router/router.gr.dart';
 import 'package:flutter_template/global.dart';
 import 'package:flutter_template/pages/application/application.dart';
 import 'package:flutter_template/pages/sign_in/sign_in.dart';
@@ -14,6 +16,32 @@ class IndexPage extends StatefulWidget {
 
 class _IndexPageState extends State<IndexPage> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.delayed(Duration(seconds: 3), () {
+      // 判断是否是第一次
+      // true => 显示欢迎页面
+      // false=> 判断是否已经登录过↓
+      //         true => 离线登录
+      //         false=> 登录页面
+      if (Global.isFirstOpen == true) {
+        ExtendedNavigator.rootNavigator.pushReplacementNamed(
+          Routes.welcomePageRoute,
+        );
+      } else if (Global.isOfflineLogin == true) {
+        ExtendedNavigator.rootNavigator.pushReplacementNamed(
+          Routes.applicationPageRoute,
+        );
+      } else {
+        ExtendedNavigator.rootNavigator.pushReplacementNamed(
+          Routes.signInPageRoute,
+        );
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     // 初始化屏幕适配文件
     ScreenUtil.init(
@@ -22,15 +50,19 @@ class _IndexPageState extends State<IndexPage> {
       height: 812 - 44 - 34,
       allowFontScaling: true,
     );
-    // 判断是否是第一次
-    // true => 显示欢迎页面
-    // false=> 判断是否已经登录过↓
-    //         true => 离线登录
-    //         false=> 登录页面
     return Scaffold(
-      body: Global.isFirstOpen == true
-          ? WelcomePage()
-          : Global.isOfflineLogin == true ? ApplicationPage() : SignInPage(),
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: Container(
+        alignment: Alignment.center,
+        child: Text(
+          "广告页面3s...",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+      ),
     );
   }
 }

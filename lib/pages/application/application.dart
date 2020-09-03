@@ -4,7 +4,7 @@ import 'package:flutter_template/common/values/values.dart';
 import 'package:flutter_template/common/widgets/widgets.dart';
 import 'package:flutter_template/pages/account/account.dart';
 import 'package:flutter_template/pages/bookmarks/bookmarks.dart';
-import 'package:flutter_template/pages/category/category.dart';
+import 'package:flutter_template/pages/category/provider_demo.dart';
 import 'package:flutter_template/pages/main/mian_import.dart';
 
 class ApplicationPage extends StatefulWidget {
@@ -22,7 +22,7 @@ class _ApplicationPageState extends State<ApplicationPage>
   // tab 页标题
   final List<String> _tabTitles = [
     'Welcome',
-    'Cagegory',
+    'Provider_MVVM_Demo',
     'Bookmarks',
     'Account'
   ];
@@ -120,15 +120,6 @@ class _ApplicationPageState extends State<ApplicationPage>
             fontWeight: FontWeight.w600,
           ),
         ),
-        // leading: IconButton(
-        //   icon: Icon(
-        //     Icons.arrow_back,
-        //     color: AppColors.primaryText,
-        //   ),
-        //   onPressed: () {
-        //     Navigator.pop(context);
-        //   },
-        // ),
         actions: <Widget>[
           IconButton(
             icon: Icon(
@@ -158,6 +149,7 @@ class _ApplicationPageState extends State<ApplicationPage>
   // 底部导航
   Widget _buildBottomNavigationBar() {
     return BottomNavigationBar(
+      backgroundColor: Colors.black,
       items: _bottomTabs,
       currentIndex: _page,
       // fixedColor: AppColors.primaryElement,

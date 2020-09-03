@@ -15,6 +15,7 @@ import 'package:flutter_template/pages/application/application.dart';
 import 'package:flutter_template/common/router/auth_grard.dart';
 import 'package:flutter_template/pages/details/details.dart';
 import 'package:flutter_template/common/router/router.dart';
+import 'package:flutter_template/common/entites/news.dart';
 
 abstract class Routes {
   static const indexPageRoute = '/';
@@ -36,13 +37,11 @@ abstract class Routes {
 class AppRouter extends RouterBase {
   @override
   Set<String> get allRoutes => Routes.all;
-
   @override
   Map<String, List<Type>> get guardedRoutes => {
         Routes.applicationPageRoute: [AuthGuard],
         Routes.detailsPageRoute: [AuthGuard],
       };
-
   @Deprecated('call ExtendedNavigator.ofRouter<Router>() directly')
   static ExtendedNavigatorState get navigator =>
       ExtendedNavigator.ofRouter<AppRouter>();
@@ -56,22 +55,22 @@ class AppRouter extends RouterBase {
           return misTypedArgsRoute<IndexPageArguments>(args);
         }
         final typedArgs = args as IndexPageArguments ?? IndexPageArguments();
-        return CupertinoPageRoute<dynamic>(
+        return MaterialPageRoute<dynamic>(
           builder: (context) => IndexPage(key: typedArgs.key),
           settings: settings,
         );
       case Routes.welcomePageRoute:
-        return CupertinoPageRoute<dynamic>(
+        return MaterialPageRoute<dynamic>(
           builder: (context) => WelcomePage(),
           settings: settings,
         );
       case Routes.signInPageRoute:
-        return CupertinoPageRoute<dynamic>(
+        return MaterialPageRoute<dynamic>(
           builder: (context) => SignInPage(),
           settings: settings,
         );
       case Routes.signUpPageRoute:
-        return CupertinoPageRoute<dynamic>(
+        return MaterialPageRoute<dynamic>(
           builder: (context) => SignUpPage(),
           settings: settings,
         );
@@ -81,7 +80,7 @@ class AppRouter extends RouterBase {
         }
         final typedArgs =
             args as ApplicationPageArguments ?? ApplicationPageArguments();
-        return CupertinoPageRoute<dynamic>(
+        return MaterialPageRoute<dynamic>(
           builder: (context) => ApplicationPage(key: typedArgs.key),
           settings: settings,
         );
@@ -92,8 +91,8 @@ class AppRouter extends RouterBase {
         final typedArgs =
             args as DetailsPageArguments ?? DetailsPageArguments();
         return PageRouteBuilder<dynamic>(
-          pageBuilder: (context, animation, secondaryAnimation) => DetailsPage(
-              key: typedArgs.key, title: typedArgs.title, url: typedArgs.url),
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              DetailsPage(key: typedArgs.key, item: typedArgs.item),
           settings: settings,
           transitionsBuilder: zoomInTransition,
         );
@@ -110,24 +109,20 @@ class AppRouter extends RouterBase {
 //IndexPage arguments holder class
 class IndexPageArguments {
   final Key key;
-
   IndexPageArguments({this.key});
 }
 
 //ApplicationPage arguments holder class
 class ApplicationPageArguments {
   final Key key;
-
   ApplicationPageArguments({this.key});
 }
 
 //DetailsPage arguments holder class
 class DetailsPageArguments {
   final Key key;
-  final String title;
-  final String url;
-
-  DetailsPageArguments({this.key, this.title, this.url});
+  final NewsItem item;
+  DetailsPageArguments({this.key, this.item});
 }
 
 // *************************************************************************
@@ -157,10 +152,10 @@ extension AppRouterNavigationHelperMethods on ExtendedNavigatorState {
       );
 
   Future pushDetailsPageRoute(
-          {Key key, String title, String url, OnNavigationRejected onReject}) =>
+          {Key key, NewsItem item, OnNavigationRejected onReject}) =>
       pushNamed(
         Routes.detailsPageRoute,
-        arguments: DetailsPageArguments(key: key, title: title, url: url),
+        arguments: DetailsPageArguments(key: key, item: item),
         onReject: onReject,
       );
 }

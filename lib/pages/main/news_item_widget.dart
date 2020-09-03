@@ -3,7 +3,7 @@ import 'package:flutter_template/common/entites/entitys.dart';
 import 'package:flutter_template/common/utils/utils.dart';
 import 'package:flutter_template/common/values/values.dart';
 import 'package:flutter_template/common/widgets/widgets.dart';
-
+/// 新闻列表
 Widget newsItem(NewsItem item) {
   return Container(
     height: appSetHeight(161),

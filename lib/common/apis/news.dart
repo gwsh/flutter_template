@@ -1,9 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_template/common/entites/entitys.dart';
 import 'package:flutter_template/common/utils/utils.dart';
 import 'package:flutter_template/common/values/values.dart';
-
 
 /// 新闻
 class NewsAPI {
@@ -26,8 +24,8 @@ class NewsAPI {
     return NewsPageListResponseEntity.fromJson(response);
   }
 
-  /// 推荐
-  static Future<NewsRecommendResponseEntity> newsRecommend({
+  /// 新闻推荐
+  static Future<NewsItem> newsRecommend({
     @required BuildContext context,
     NewsRecommendRequestEntity params,
     bool refresh = false,
@@ -40,7 +38,7 @@ class NewsAPI {
       refresh: refresh,
       cacheDisk: cacheDisk,
     );
-    return NewsRecommendResponseEntity.fromJson(response);
+    return NewsItem.fromJson(response);
   }
 
   /// 分类

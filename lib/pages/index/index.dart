@@ -4,10 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_template/common/router/router.gr.dart';
 import 'package:flutter_template/common/utils/screen.dart';
 import 'package:flutter_template/global.dart';
-import 'package:flutter_template/pages/application/application.dart';
-import 'package:flutter_template/pages/sign_in/sign_in.dart';
-import 'package:flutter_template/pages/welcome/welcome_page.dart';
 
+/// 广告页面
 class IndexPage extends StatefulWidget {
   IndexPage({Key key}) : super(key: key);
 
@@ -16,12 +14,14 @@ class IndexPage extends StatefulWidget {
 }
 
 class _IndexPageState extends State<IndexPage> {
+  bool isClick = false;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     Future.delayed(Duration(seconds: 3), () {
-      checkToPage();
+      if (!isClick) checkToPage();
     });
   }
 
@@ -75,6 +75,11 @@ class _IndexPageState extends State<IndexPage> {
             right: appSetWidth(22),
             child: InkWell(
               onTap: () {
+                if (mounted) {
+                  setState(() {
+                    isClick = true;
+                  });
+                }
                 checkToPage();
               },
               child: Container(

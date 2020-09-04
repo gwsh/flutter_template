@@ -35,7 +35,7 @@ class ProviderViewDemo extends BaseViewModel {
     }
 
     /// 下拉刷新和有缓存不需要骨架卡片
-    if (!refresh&&!CACHE_ENABLE) {
+    if (!refresh) {
       state = BaseState.LOADING;
     }
     notifyListeners();

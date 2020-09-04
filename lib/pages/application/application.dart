@@ -19,14 +19,6 @@ class _ApplicationPageState extends State<ApplicationPage>
   // 当前 tab 页码
   int _page = 0;
 
-  // tab 页标题
-  final List<String> _tabTitles = [
-    'Welcome',
-    'Provider_MVVM_Demo',
-    'Bookmarks',
-    'Account'
-  ];
-
   // 页控制器
   PageController _pageController;
 
@@ -107,30 +99,6 @@ class _ApplicationPageState extends State<ApplicationPage>
     super.dispose();
   }
 
-  // 顶部导航
-  Widget _buildAppBar() {
-    return transparentAppBar(
-        context: context,
-        title: Text(
-          _tabTitles[_page],
-          style: TextStyle(
-            color: AppColors.primaryText,
-            fontFamily: 'Montserrat',
-            fontSize: appSetFontSize(18.0),
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.search,
-              color: AppColors.primaryText,
-            ),
-            onPressed: () {},
-          )
-        ]);
-  }
-
   // 内容页
   Widget _buildPageView() {
     return PageView(
@@ -173,7 +141,8 @@ class _ApplicationPageState extends State<ApplicationPage>
         return true;
       },
       child: Scaffold(
-        appBar: _buildAppBar(),
+        // 让子类去写Appbar更加符合业务需求
+        // appBar: _buildAppBar(),
         body: _buildPageView(),
         bottomNavigationBar: _buildBottomNavigationBar(),
       ),

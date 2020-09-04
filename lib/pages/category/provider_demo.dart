@@ -65,6 +65,18 @@ class _CategoryPageState extends State<CategoryPage>
             );
           },
           builder: (context) => Scaffold(
+            appBar: transparentAppBar(
+              context: context,
+              title: Text(
+                "Provider_MVVM",
+                style: TextStyle(
+                  color: AppColors.primaryText,
+                  fontFamily: 'Montserrat',
+                  fontSize: appSetFontSize(18.0),
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
             backgroundColor: Colors.white,
             body: Container(
               child: EasyRefresh(

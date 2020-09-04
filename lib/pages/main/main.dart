@@ -180,38 +180,52 @@ class _MainPageState extends State<MainPage>
     // 切记！ 为了不让PageView子页面重绘
     // 子页面需要 super.build
     super.build(context);
-    return _newsPageList == null
-        ? cardListSkeleton()
-        : EasyRefresh(
-            enableControlFinishRefresh: true,
-            controller: _controller,
-            header: MaterialHeader(),
-            onRefresh: () async {
-              try {
-                await _loadNewsData(
-                  _selCategoryCode,
-                  refresh: true,
-                );
-                _controller?.finishRefresh();
-              } catch (e) {
-                _controller?.finishRefresh();
-              }
-            },
-            child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  _buildCategories(),
-                  Divider(height: 1),
-                  _buildRecommend(),
-                  Divider(height: 1),
-                  _buildChannels(),
-                  Divider(height: 1),
-                  _buildNewsList(),
-                  Divider(height: 1),
-                  _buildEmailSubscribe(),
-                ],
+    return Scaffold(
+      appBar: transparentAppBar(
+        context: context,
+        title: Text(
+          "首页",
+          style: TextStyle(
+            color: AppColors.primaryText,
+            fontFamily: 'Montserrat',
+            fontSize: appSetFontSize(18.0),
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      body: _newsPageList == null
+          ? cardListSkeleton()
+          : EasyRefresh(
+              enableControlFinishRefresh: true,
+              controller: _controller,
+              header: MaterialHeader(),
+              onRefresh: () async {
+                try {
+                  await _loadNewsData(
+                    _selCategoryCode,
+                    refresh: true,
+                  );
+                  _controller?.finishRefresh();
+                } catch (e) {
+                  _controller?.finishRefresh();
+                }
+              },
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    _buildCategories(),
+                    Divider(height: 1),
+                    _buildRecommend(),
+                    Divider(height: 1),
+                    _buildChannels(),
+                    Divider(height: 1),
+                    _buildNewsList(),
+                    Divider(height: 1),
+                    _buildEmailSubscribe(),
+                  ],
+                ),
               ),
             ),
-          );
+    );
   }
 }

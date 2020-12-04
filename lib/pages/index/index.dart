@@ -18,7 +18,6 @@ class _IndexPageState extends State<IndexPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Future.delayed(Duration(seconds: 3), () {
       if (!isClick) checkToPage();
@@ -32,17 +31,11 @@ class _IndexPageState extends State<IndexPage> {
     //         true => 离线登录
     //         false=> 登录页面
     if (Global.isFirstOpen == true) {
-      ExtendedNavigator.rootNavigator.pushReplacementNamed(
-        Routes.welcomePageRoute,
-      );
+      ExtendedNavigator.root.pushWelcomePageRoute();
     } else if (Global.isOfflineLogin == true) {
-      ExtendedNavigator.rootNavigator.pushReplacementNamed(
-        Routes.applicationPageRoute,
-      );
+      ExtendedNavigator.root.pushApplicationPageRoute();
     } else {
-      ExtendedNavigator.rootNavigator.pushReplacementNamed(
-        Routes.signInPageRoute,
-      );
+      ExtendedNavigator.root.pushSignInPageRoute();
     }
   }
 

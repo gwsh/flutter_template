@@ -33,7 +33,8 @@ class _ApplicationPageState extends State<ApplicationPage>
         Iconfont.home,
         color: AppColors.secondaryElementText,
       ),
-      title: Text('main'),
+      label: "main",
+      // title: Text('main'),
       backgroundColor: AppColors.primaryBackground,
     ),
     BottomNavigationBarItem(
@@ -45,7 +46,8 @@ class _ApplicationPageState extends State<ApplicationPage>
         Iconfont.grid,
         color: AppColors.secondaryElementText,
       ),
-      title: Text('category'),
+      // title: Text('category'),
+      label: "category",
       backgroundColor: AppColors.primaryBackground,
     ),
     BottomNavigationBarItem(
@@ -57,7 +59,8 @@ class _ApplicationPageState extends State<ApplicationPage>
         Iconfont.tag,
         color: AppColors.secondaryElementText,
       ),
-      title: Text('tag'),
+      // title: Text('tag'),
+      label: "tag",
       backgroundColor: AppColors.primaryBackground,
     ),
     BottomNavigationBarItem(
@@ -69,7 +72,8 @@ class _ApplicationPageState extends State<ApplicationPage>
         Iconfont.me,
         color: AppColors.secondaryElementText,
       ),
-      title: Text('my'),
+      // title: Text('my'),
+      label: "my",
       backgroundColor: AppColors.primaryBackground,
     ),
   ];

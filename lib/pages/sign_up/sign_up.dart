@@ -187,7 +187,7 @@ class _SignUpPageState extends State<SignUpPage> {
         context: context,
         leading: InkWell(
           onTap: () {
-            ExtendedNavigator.rootNavigator.pop();
+            ExtendedNavigator.root.pop();
           },
           child: Container(
             child: Icon(

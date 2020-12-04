@@ -22,5 +22,5 @@ Future deleteAuthentication() async {
 /// 重新登录
 Future goLoginPage(BuildContext context) async {
   await deleteAuthentication();
-  ExtendedNavigator.rootNavigator.pushReplacementNamed(Routes.signInPageRoute);
+  ExtendedNavigator.root.pushSignInPageRoute();
 }

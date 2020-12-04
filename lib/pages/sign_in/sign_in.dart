@@ -28,7 +28,7 @@ class _SignInPageState extends State<SignInPage> {
     //   context,
     //   "/sign-up",
     // );
-    ExtendedNavigator.rootNavigator.pushNamed(Routes.signUpPageRoute);
+    ExtendedNavigator.root.pushSignUpPageRoute();
   }
 
   // 登录操作
@@ -45,13 +45,17 @@ class _SignInPageState extends State<SignInPage> {
       email: _emailController.value.text,
       password: appSHA256(_passController.value.text),
     );
-    UserLoginResponseEntity userProfile =
-        await UserAPI.login(params: params, context: context);
+    // UserLoginResponseEntity userProfile =
+    //     await UserAPI.login(params: params, context: context);
+    UserLoginResponseEntity userProfile = UserLoginResponseEntity(
+      accessToken: "123",
+      displayName: "测试",
+      channels: ["爱好", "哥哥好"],
+    );
     assert(userProfile != null);
     // 持久化数据
     await Global.saveProfile(userProfile);
-    ExtendedNavigator.rootNavigator
-        .pushReplacementNamed(Routes.applicationPageRoute);
+    ExtendedNavigator.root.pushApplicationPageRoute();
   }
 
   // logo

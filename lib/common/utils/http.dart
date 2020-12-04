@@ -81,7 +81,7 @@ class HttpUtil {
     }, onError: (DioError e) {
       ErrorEntity eInfo = createErrorEntity(e);
       // 错误提示
-      toastInfo(msg: eInfo.message);
+      // toastInfo(msg: eInfo.message);
       // 错误交互处理
       var context = e.request.extra["context"];
       if (context != null) {

@@ -11,7 +11,7 @@ class AuthGuard extends RouteGuard {
     var isAuth = await isAuthenticated();
     if (isAuth == false) {
       toastInfo(msg: "你没有权限，请登录~");
-      ExtendedNavigator.rootNavigator.pushNamed(Routes.signInPageRoute);
+      ExtendedNavigator.root.pushSignInPageRoute();
     }
     return isAuth;
   }

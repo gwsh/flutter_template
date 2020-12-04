@@ -38,7 +38,6 @@ class MyApp extends StatelessWidget {
       builder: ExtendedNavigator<AppRouter>(
         initialRoute: Routes.indexPageRoute,
         router: AppRouter(),
-        // 权限守卫
         guards: [AuthGuard()],
       ),
     );

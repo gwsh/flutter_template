@@ -8,6 +8,7 @@ import 'package:flutter_template/pages/sign_up/sign_up.dart';
 import 'package:flutter_template/pages/welcome/welcome_page.dart';
 
 import 'auth_grard.dart';
+
 // 动画
 Widget zoomInTransition(BuildContext context, Animation<double> animation,
     Animation<double> secondaryAnimation, Widget child) {
@@ -16,23 +17,37 @@ Widget zoomInTransition(BuildContext context, Animation<double> animation,
   return ScaleTransition(scale: animation, child: child);
 }
 
-@MaterialAutoRouter(generateNavigationHelperExtension: true)
-class $AppRouter {
-  @initial
-  IndexPage indexPageRoute;
-
-  WelcomePage welcomePageRoute;
-
-  SignInPage signInPageRoute;
-
-  SignUpPage signUpPageRoute;
-
-  @GuardedBy([AuthGuard])
-  ApplicationPage applicationPageRoute;
-  /// 跳转到该页面需要授权
-  /// 一般而言 只有登录 注册 还原不需要做权限验证
-  /// 当然这个还是看你的业务
-  @GuardedBy([AuthGuard])
-  @CustomRoute(transitionsBuilder: zoomInTransition)
-  DetailsPage detailsPageRoute;
-}
+@MaterialAutoRouter(
+  generateNavigationHelperExtension: true,
+  routes: [
+    MaterialRoute(
+      initial: true,
+      page: IndexPage,
+      name: "indexPageRoute",
+    ),
+    CustomRoute(
+      page: WelcomePage,
+      name: "welcomePageRoute",
+      transitionsBuilder: zoomInTransition,
+    ),
+    MaterialRoute(
+      page: SignInPage,
+      name: "signInPageRoute",
+    ),
+    MaterialRoute(
+      page: SignUpPage,
+      name: "signUpPageRoute",
+    ),
+    MaterialRoute(
+      page: ApplicationPage,
+      name: "applicationPageRoute",
+      guards: [AuthGuard],
+    ),
+    MaterialRoute(
+      page: DetailsPage,
+      name: "detailsPageRoute",
+      guards: [AuthGuard],
+    ),
+  ],
+)
+class $AppRouter {}

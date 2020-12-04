@@ -104,9 +104,7 @@ class _WelcomePageState extends State<WelcomePage> {
           borderRadius: Radii.k6pxRadius,
         ),
         onPressed: () {
-          ExtendedNavigator.rootNavigator.pushReplacementNamed(
-            Routes.signInPageRoute,
-          );
+          ExtendedNavigator.root.pushSignInPageRoute();
         },
       ),
     );

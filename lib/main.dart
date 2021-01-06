@@ -6,7 +6,8 @@ import 'package:provider/provider.dart';
 import 'common/provider/provider.dart';
 import 'global.dart';
 
-void main() => Global.init().then(
+/// 入口函数
+void main() => Global.init(type: ModelType.dev).then(
       (e) => runApp(
         MultiProvider(
           providers: [

@@ -33,7 +33,7 @@ class _IndexPageState extends State<IndexPage> {
     if (Global.isFirstOpen == true) {
       ExtendedNavigator.root.pushWelcomePageRoute();
     } else if (Global.isOfflineLogin == true) {
-      ExtendedNavigator.root.pushApplicationPageRoute();
+      ExtendedNavigator.root.pushAndRemoveUntil(Routes.applicationPageRoute, (route) => false);
     } else {
       ExtendedNavigator.root.pushSignInPageRoute();
     }

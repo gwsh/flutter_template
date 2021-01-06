@@ -64,7 +64,7 @@ class _AccountPagePageState extends State<AccountPage>
               return;
             },
             floating: true,
-            expandedHeight: 220.0,
+            expandedHeight: appSetWidth(240),
             flexibleSpace: Stack(
               children: [
                 Container(
@@ -80,7 +80,7 @@ class _AccountPagePageState extends State<AccountPage>
                       ],
                       title: isHide
                           ? Text(
-                              "Eric Hernandez",
+                              "gwsh",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: appSetFontSize(16.0),
@@ -235,7 +235,7 @@ class _AccountPagePageState extends State<AccountPage>
                 color: Colors.lightBlue[100 * (index % 9)],
                 child: new Text('list item $index'),
               );
-            }, childCount: 50 //50个列表项
+            }, childCount: 10 //50个列表项
                 ),
           ),
         ],

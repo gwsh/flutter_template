@@ -21,7 +21,13 @@ class NewsAPI {
       cacheDisk: cacheDisk,
       cacheKey: STORAGE_INDEX_NEWS_CACHE_KEY,
     );
-    return NewsPageListResponseEntity.fromJson(response);
+    var result = NewsPageListResponseEntity();
+    try {
+      result = NewsPageListResponseEntity.fromJson(response);
+    }catch(e){
+      AppLogUtil.e(e);
+    }
+    return result;
   }
 
   /// 新闻推荐
@@ -38,7 +44,13 @@ class NewsAPI {
       refresh: refresh,
       cacheDisk: cacheDisk,
     );
-    return NewsItem.fromJson(response);
+    var result = NewsItem();
+    try {
+      result = NewsItem.fromJson(response);
+    } catch (e) {
+      AppLogUtil.e(e);
+    }
+    return result;
   }
 
   /// 分类
@@ -51,10 +63,16 @@ class NewsAPI {
       context: context,
       cacheDisk: cacheDisk,
     );
-    return response
-        .map<CategoryResponseEntity>(
-            (item) => CategoryResponseEntity.fromJson(item))
-        .toList();
+    List<CategoryResponseEntity> result = [];
+    try {
+      result = response
+          .map<CategoryResponseEntity>(
+              (item) => CategoryResponseEntity.fromJson(item))
+          .toList();
+    } catch (e) {
+      AppLogUtil.e(e);
+    }
+    return result;
   }
 
   /// 频道
@@ -67,10 +85,16 @@ class NewsAPI {
       context: context,
       cacheDisk: cacheDisk,
     );
-    return response
-        .map<ChannelResponseEntity>(
-            (item) => ChannelResponseEntity.fromJson(item))
-        .toList();
+    List<ChannelResponseEntity> result = [];
+    try {
+      result = response
+          .map<ChannelResponseEntity>(
+              (item) => ChannelResponseEntity.fromJson(item))
+          .toList();
+    } catch (e) {
+      AppLogUtil.e(e);
+    }
+    return result;
   }
 
   /// 标签列表

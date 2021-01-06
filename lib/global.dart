@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_template/common/entites/entitys.dart';
+import 'package:logger/logger.dart';
 import 'common/provider/provider.dart';
 import 'common/utils/utils.dart';
 import 'common/values/values.dart';
@@ -20,12 +21,11 @@ enum ModelType {
 
 /// 全局配置
 class Global {
-  /// 用户配置
+  /// 用户配置 全局可以拿到用户信息
   static UserLoginResponseEntity profile = UserLoginResponseEntity(
     accessToken: null,
   );
 
-  /// 开发环境 // TODO 待整合
   /// 预计整合日志系统(dev环境才会显示日志) 和BASE_URL
   static ModelType modelType = ModelType.pro;
 
@@ -41,10 +41,18 @@ class Global {
   /// 是否 release
   static bool get isRelease => bool.fromEnvironment("dart.vm.product");
 
-  /// init
-  static Future init() async {
+  /// 全局日志
+  ///
+  static Logger logger;
+
+  /// 暴露的初始化方法 init
+  static Future init({ModelType type = ModelType.pro}) async {
     // 运行初始
     WidgetsFlutterBinding.ensureInitialized();
+
+    modelType = type;
+
+    logger = _createLogger();
 
     // 工具初始
     await StorageUtil.init();
@@ -83,5 +91,14 @@ class Global {
     profile = userResponse;
     return StorageUtil()
         .setJSON(STORAGE_USER_PROFILE_KEY, userResponse.toJson());
+  }
+
+  static Logger _createLogger() {
+    Logger logger = Logger(
+        printer: PrettyPrinter(
+      printTime: true,
+    ));
+    Logger.level = Level.debug;
+    return logger;
   }
 }

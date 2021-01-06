@@ -25,8 +25,8 @@ class _MainPageState extends State<MainPage>
   EasyRefreshController _controller; // EasyRefresh控制器
   NewsPageListResponseEntity _newsPageList; // 新闻翻页
   NewsItem _newsRecommend; // 新闻推荐
-  List<CategoryResponseEntity> _categories; // 分类
-  List<ChannelResponseEntity> _channels; // 频道
+  List<CategoryResponseEntity> _categories = []; // 分类
+  List<ChannelResponseEntity> _channels = []; // 频道
   String _selCategoryCode; // 选中的分类Code
 
   @override
@@ -79,7 +79,7 @@ class _MainPageState extends State<MainPage>
       cacheDisk: true,
     );
 
-    _selCategoryCode = _categories.first.code;
+    _selCategoryCode = _categories?.first?.code ?? "";
 
     if (mounted) {
       setState(() {});
@@ -146,7 +146,7 @@ class _MainPageState extends State<MainPage>
             height: appSetHeight(161 * 5 + 100.0),
           )
         : Column(
-            children: _newsPageList.items.map((item) {
+            children: _newsPageList?.items?.map((item) {
               // 新闻行
               List<Widget> widgets = <Widget>[
                 newsItem(item),
@@ -165,7 +165,7 @@ class _MainPageState extends State<MainPage>
               return Column(
                 children: widgets,
               );
-            }).toList(),
+            })?.toList()??[],
           );
   }
 

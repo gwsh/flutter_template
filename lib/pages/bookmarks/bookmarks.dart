@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_template/common/utils/screen.dart';
 
 class BookmarksPage extends StatefulWidget {
   BookmarksPage({Key key}) : super(key: key);
@@ -10,8 +11,13 @@ class BookmarksPage extends StatefulWidget {
 class _BookmarksPageState extends State<BookmarksPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('BookMarks'),
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        child: Text("书店",style: TextStyle(
+          fontSize: appSetFontSize(24)
+        ),),
+      ),
     );
   }
 }

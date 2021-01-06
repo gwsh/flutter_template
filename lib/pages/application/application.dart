@@ -25,55 +25,79 @@ class _ApplicationPageState extends State<ApplicationPage>
   // 底部导航项目
   final List<BottomNavigationBarItem> _bottomTabs = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
-      icon: Icon(
-        Iconfont.home,
-        color: AppColors.tabBarElement,
+      icon: Container(
+        padding: EdgeInsets.symmetric(vertical: 10),
+        child: Icon(
+          Iconfont.home,
+          color: AppColors.tabBarElement,
+        ),
       ),
-      activeIcon: Icon(
-        Iconfont.home,
-        color: AppColors.secondaryElementText,
+      activeIcon: Container(
+        padding: EdgeInsets.symmetric(vertical: 10),
+        child: Icon(
+          Iconfont.home,
+          color: AppColors.secondaryElementText,
+        ),
       ),
-      label: "main",
+      label: "首页",
       // title: Text('main'),
       backgroundColor: AppColors.primaryBackground,
     ),
     BottomNavigationBarItem(
-      icon: Icon(
-        Iconfont.grid,
-        color: AppColors.tabBarElement,
+      icon: Container(
+        padding: EdgeInsets.symmetric(vertical: 10),
+        child: Icon(
+          Iconfont.grid,
+          color: AppColors.tabBarElement,
+        ),
       ),
-      activeIcon: Icon(
-        Iconfont.grid,
-        color: AppColors.secondaryElementText,
+      activeIcon: Container(
+        padding: EdgeInsets.symmetric(vertical: 10),
+        child: Icon(
+          Iconfont.grid,
+          color: AppColors.secondaryElementText,
+        ),
       ),
       // title: Text('category'),
-      label: "category",
+      label: "商城",
       backgroundColor: AppColors.primaryBackground,
     ),
     BottomNavigationBarItem(
-      icon: Icon(
-        Iconfont.tag,
-        color: AppColors.tabBarElement,
+      icon: Container(
+        padding: EdgeInsets.symmetric(vertical: 10),
+        child: Icon(
+          Iconfont.tag,
+          color: AppColors.tabBarElement,
+        ),
       ),
-      activeIcon: Icon(
-        Iconfont.tag,
-        color: AppColors.secondaryElementText,
+      activeIcon: Container(
+        padding: EdgeInsets.symmetric(vertical: 10),
+        child: Icon(
+          Iconfont.tag,
+          color: AppColors.secondaryElementText,
+        ),
       ),
       // title: Text('tag'),
-      label: "tag",
+      label: "书店",
       backgroundColor: AppColors.primaryBackground,
     ),
     BottomNavigationBarItem(
-      icon: Icon(
-        Iconfont.me,
-        color: AppColors.tabBarElement,
+      icon: Container(
+        padding: EdgeInsets.symmetric(vertical: 10),
+        child: Icon(
+          Iconfont.me,
+          color: AppColors.tabBarElement,
+        ),
       ),
-      activeIcon: Icon(
-        Iconfont.me,
-        color: AppColors.secondaryElementText,
+      activeIcon: Container(
+        padding: EdgeInsets.symmetric(vertical: 10),
+        child: Icon(
+          Iconfont.me,
+          color: AppColors.secondaryElementText,
+        ),
       ),
       // title: Text('my'),
-      label: "my",
+      label: "我的",
       backgroundColor: AppColors.primaryBackground,
     ),
   ];
@@ -123,10 +147,19 @@ class _ApplicationPageState extends State<ApplicationPage>
     return BottomNavigationBar(
       items: _bottomTabs,
       currentIndex: _page,
+      iconSize: 26,
       type: BottomNavigationBarType.fixed,
       onTap: _handleNavBarTap,
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
+      selectedLabelStyle: TextStyle(
+        fontFamily: 'Avenir',
+        fontSize: appSetFontSize(14),
+      ),
+      unselectedLabelStyle: TextStyle(
+        fontFamily: 'Avenir',
+        fontSize: appSetFontSize(14),
+      ),
+      // showSelectedLabels: true,
+      // showUnselectedLabels: true,
     );
   }
 

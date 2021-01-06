@@ -75,10 +75,17 @@ class HttpUtil {
     // 添加拦截器
     dio.interceptors
         .add(InterceptorsWrapper(onRequest: (RequestOptions options) {
+      AppLogUtil.d(
+          "calling[${options.method}] remote api: ${options.uri}, queryParams: ${options.queryParameters}, data:${options.data}, headers: ${options.headers}");
       return options; //continue
     }, onResponse: (Response response) {
+      AppLogUtil.d(
+          "calling remote api success: ${response.statusCode}-${response.data}");
       return response; // continue
     }, onError: (DioError e) {
+      AppLogUtil.e(
+          "calling remote api failed: ${e.response.statusCode}-${e.response.data}",
+          e);
       ErrorEntity eInfo = createErrorEntity(e);
       // 错误提示
       // toastInfo(msg: eInfo.message);

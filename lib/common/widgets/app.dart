@@ -13,9 +13,7 @@ Widget transparentAppBar({
     backgroundColor: Colors.transparent,
     brightness: Brightness.light,
     elevation: 0,
-    title: Center(
-      child: title,
-    ),
+    title: title ?? Text(""),
     leading: leading,
     actions: actions,
   );
@@ -37,6 +35,7 @@ class StatusBar {
     SystemUiOverlayStyle light = SystemUiOverlayStyle(
       systemNavigationBarColor: Color(0xFF000000),
       systemNavigationBarDividerColor: null,
+
       /// 注意安卓要想实现沉浸式的状态栏 需要底部设置透明色
       statusBarColor: Colors.transparent,
       systemNavigationBarIconBrightness: Brightness.light,
@@ -47,6 +46,7 @@ class StatusBar {
     SystemUiOverlayStyle dark = SystemUiOverlayStyle(
       systemNavigationBarColor: Color(0xFF000000),
       systemNavigationBarDividerColor: null,
+
       /// 注意安卓要想实现沉浸式的状态栏 需要底部设置透明色
       statusBarColor: Colors.transparent,
       systemNavigationBarIconBrightness: Brightness.light,

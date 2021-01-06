@@ -51,7 +51,7 @@ Widget newsChannelsWidget({
                           top: appSetWidth(10),
                           right: appSetWidth(10),
                           child: Image.asset(
-                            "assets/images/channel-${item.code}.png",
+                            "assets/images/channel-${item.title}.png",
                             fit: BoxFit.none,
                           ),
                         ),

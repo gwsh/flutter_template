@@ -1,6 +1,6 @@
 /// Provider + stateView 测试
 class ProviderDemoEntity {
-  List<Subjects> item;
+  List<Subjects> item = [];
 
   ProviderDemoEntity({this.item});
 

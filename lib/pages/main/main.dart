@@ -147,25 +147,26 @@ class _MainPageState extends State<MainPage>
           )
         : Column(
             children: _newsPageList?.items?.map((item) {
-              // 新闻行
-              List<Widget> widgets = <Widget>[
-                newsItem(item),
-                Divider(height: 1),
-              ];
+                  // 新闻行
+                  List<Widget> widgets = <Widget>[
+                    newsItem(item),
+                    Divider(height: 1),
+                  ];
 
-              // 每 5 条 显示广告
-              int index = _newsPageList.items.indexOf(item);
-              if (((index + 1) % 5) == 0) {
-                widgets.addAll(<Widget>[
-                  adWidget(),
-                  Divider(height: 1),
-                ]);
-              }
-              // 返回
-              return Column(
-                children: widgets,
-              );
-            })?.toList()??[],
+                  // 每 5 条 显示广告
+                  int index = _newsPageList.items.indexOf(item);
+                  if (((index + 1) % 5) == 0) {
+                    widgets.addAll(<Widget>[
+                      adWidget(),
+                      Divider(height: 1),
+                    ]);
+                  }
+                  // 返回
+                  return Column(
+                    children: widgets,
+                  );
+                })?.toList() ??
+                [],
           );
   }
 
@@ -182,6 +183,9 @@ class _MainPageState extends State<MainPage>
     super.build(context);
     return Scaffold(
       appBar: transparentAppBar(
+        onDoubleTapTop: () {
+          AppLogUtil.d("双击了");
+        },
         context: context,
         title: Text(
           "首页",

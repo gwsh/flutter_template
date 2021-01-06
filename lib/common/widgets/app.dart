@@ -7,13 +7,17 @@ Widget transparentAppBar({
   @required BuildContext context,
   Widget title,
   Widget leading,
+  GestureTapCallback onDoubleTapTop,
   List<Widget> actions,
 }) {
   return AppBar(
     backgroundColor: Colors.transparent,
     brightness: Brightness.light,
     elevation: 0,
-    title: title ?? Text(""),
+    title: InkWell(
+      child: title ?? Text(""),
+      onDoubleTap: onDoubleTapTop,
+    ),
     leading: leading,
     actions: actions,
   );
